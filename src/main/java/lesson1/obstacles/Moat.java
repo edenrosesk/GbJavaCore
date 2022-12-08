@@ -1,4 +1,4 @@
-package obstacles;
+package lesson1.obstacles;
 
 public class Moat extends Obstacle {
     public Moat() {

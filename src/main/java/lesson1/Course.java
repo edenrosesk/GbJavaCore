@@ -1,6 +1,6 @@
 package lesson1;
 
-import obstacles.Obstacle;
+import lesson1.obstacles.Obstacle;
 
 public class Course {
     private final Obstacle[] obstacles;

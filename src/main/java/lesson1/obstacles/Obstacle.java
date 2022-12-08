@@ -1,4 +1,4 @@
-package obstacles;
+package lesson1.obstacles;
 
 public abstract class Obstacle {
     private final String description;

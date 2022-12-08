@@ -1,9 +1,9 @@
 package lesson1;
 
-import obstacles.BossFight;
-import obstacles.Moat;
-import obstacles.Obstacle;
-import obstacles.Wall;
+import lesson1.obstacles.BossFight;
+import lesson1.obstacles.Moat;
+import lesson1.obstacles.Obstacle;
+import lesson1.obstacles.Wall;
 
 public class Homework1 {
     public static void main(String[] args) {
