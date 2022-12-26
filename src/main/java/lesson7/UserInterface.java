@@ -1,6 +1,7 @@
 package lesson7;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -10,20 +11,23 @@ public class UserInterface {
     public void runApplication() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Введите название города на английском языке");
-            String city = scanner.nextLine();
-
-            setGlobalCity(city);
 
             System.out.println("Введите ответ: 1 - Получить текущую погоду, " +
-                    "2 - Получить погоду на следующие 5 дней, " +
+                    "2 - Получить погоду на следующие 5 дней, 3 - получить погоду из БД, " +
                     "выход (exit) - завершить работу");
             String result = scanner.nextLine();
 
             checkIsExit(result);
 
             try {
-                validateUserInput(result);
+                int answer = validateUserInput(result);
+                if (answer != 3) {
+                    System.out.println("Введите название города на английском языке");
+                    String city = scanner.nextLine();
+
+                    setGlobalCity(city);
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
                 continue;
@@ -33,6 +37,8 @@ public class UserInterface {
                 notifyController(result);
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         }
@@ -50,19 +56,21 @@ public class UserInterface {
     }
 
 
-    private void validateUserInput(String userInput) throws IOException {
+    private int validateUserInput(String userInput) throws IOException {
         if (userInput == null || userInput.length() != 1) {
             throw new IOException("Incorrect user input: expected one digit as answer, but actually get " + userInput);
         }
         int answer = 0;
         try {
             answer = Integer.parseInt(userInput);
+            return answer;
+
         } catch (NumberFormatException e) {
             throw new IOException("Incorrect user input: character is not numeric!");
         }
     }
 
-    private void notifyController(String input) throws IOException {
+    private void notifyController(String input) throws IOException, SQLException {
         controller.onUserInput(input);
     }
 
