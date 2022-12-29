@@ -5,6 +5,7 @@ public final class ApplicationGlobalState {
     private static ApplicationGlobalState INSTANCE;
     private String selectedCity = null;
     private final String API_KEY = "R7A2QP7rgxYxRUGjhlqPOJKfU27BCZK4";
+    private final String DB_FILENAME = "weather.db";
 
     private ApplicationGlobalState() {
     }
@@ -28,5 +29,9 @@ public final class ApplicationGlobalState {
 
     public String getApiKey() {
         return this.API_KEY;
+    }
+
+    public String getDbFileName() {
+        return DB_FILENAME;
     }
 }
